@@ -10,17 +10,6 @@ const cookieParser = require('cookie-parser');
 
 
 
-// 특정 도메인에서의 요청 허용
-const allowedOrigins = ['http://127.0.0.1:5500'];
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-}));
 
 // bodyParser 미들웨어를 사용하여 POST 요청의 바디를 파싱
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,6 +33,17 @@ app.get('/index', function (req, res) {
 
 
 
+// 특정 도메인에서의 요청 허용
+const allowedOrigins = ['http://127.0.0.1:5500'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+}));
 
 
 app.post('/Login', (req, res) => {

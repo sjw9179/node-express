@@ -34,7 +34,7 @@ app.get('/index', function (req, res) {
 
 
 // 특정 도메인에서의 요청 허용
-const allowedOrigins = ['http://127.0.0.1:5500'];
+const allowedOrigins = ['https://studcode.netlify.app'];
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -56,7 +56,7 @@ app.post('/Login', (req, res) => {
         // 로그인 성공 시 JWT 토큰 생성
         const expiresIn = req.body.expiresIn || 30 * 24 * 60 * 60; // 기본적으로 1달 (초 단위)
 
-        const token = jwt.sign({ email, randomString }, process.env.StudSecretTokenKey, { expiresIn });
+        const token = jwt.sign({ email, randomString }, '133333', { expiresIn });
 
         // 토큰을 JSON 응답에 함께 보냅니다.
         res.json({
@@ -85,7 +85,7 @@ app.post('/CheckLogin', (req, res) => {
     }
 
     // 토큰 확인
-    jwt.verify(token, process.env.StudSecretTokenKey, (err, decoded) => {
+    jwt.verify(token, '133333', (err, decoded) => {
         if (err) {
             // 토큰이 유효하지 않으면 로그인이 되어 있지 않은 상태로 간주
             console.log('No mm token');
